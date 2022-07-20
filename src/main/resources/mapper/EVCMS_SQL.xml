@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="evcms">
+
+	<select id="selectChargeMachineFromMachineID" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL SelectChargeMachineFromMachineID(#{machineId}) 	
+		}
+	</select>
+
+	<select id="getMemberIdxFromCardTag" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetMemberIdxFromCardTag(#{cardTag}) 	
+		}
+	</select>
+	
+	<select id="getChargeMachineForRestAccess" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetChargeMachineForRestAccess(#{token}) 	
+		}
+	</select>	
+	
+	<select id="isCardTagExist" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL IsCardTagExist(#{cardTag})
+		}
+	</select>	
+	
+	<select id="selectMemberCardTagWithMemberID" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL SelectMemberCardTagWithMemberID(#{memberIdx}) 	
+		}
+	</select>
+	
+	<select id="getTransactionPowerPrice" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetTransactionPowerPrice(#{machineId}, #{connectId}, #{cardTag}, #{timeStamp}, #{chargePrice, mode=OUT, jdbcType=INTEGER, javaType=Integer}) 	
+		}
+	</select>	
+	
+	<select id="stopTransaction" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL StopTransaction(#{machineId}, #{cardTag}, #{power}, #{transactionPower}, #{timeStamp}) 	
+		}
+	</select>
+
+	<select id="selectChargeMachineInfo" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL SelectChargeMachineInfo(#{machineId}) 	
+		}
+	</select>
+
+	<select id="getMachineChargeRateTemplateData" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetMachineChargeRateTemplateData(#{machineId}) 	
+		}
+	</select>
+
+	<select id="getMemberID" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetMemberID(#{memberIdx}) 	
+		}
+	</select>
+	
+	<select id="getChargeMachineIdx" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetChargeMachineIdx(#{machineId}) 	
+		}
+	</select>	
+
+	<select id="isExistSerialNumber" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL IsExistSerialNumber(#{machineId}) 	
+		}
+	</select>
+
+	<select id="getGuestInfoByGuestTag" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetGuestInfoByGuestTag(#{guestTag}) 	
+		}
+	</select>
+	
+	<select id="getSelectedGuestInfo" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetSelectedGuestInfo(#{guestIdx}) 	
+		}
+	</select>
+
+	<select id="getLastFirmwareInfo" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetLastFirmwareInfo() 	
+		}
+	</select>
+	
+	<select id="getInstallationStatusBySerialNumber" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">	
+		{
+			CALL GetInstallationStatusBySerialNumber(#{machineId}) 	
+		}
+	</select>
+	
+	<insert id="addOCPPRecvLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddOCPPRecvLog(#{machineId}, #{message}, #{uniqueId}, #{payload}) 	
+		}
+	</insert>
+
+	<insert id="startTransaction" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL StartTransaction(#{machineId}, #{cardTag}, #{meterStart}, #{timeStamp})
+		}
+	</insert>
+
+	<insert id="addPeriodicLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddPeriodicLog(#{machineId}, #{modemIp}, #{rssi}, #{rsrp}, #{rsrq}
+							, #{usageSend}, #{usageRecv}, #{boardCurr}
+							, #{conn1Status}, #{conn1Watt}, #{conn1Volt}, #{conn1Curr}, #{conn1Temp}
+							, #{conn2Status}, #{conn2Watt}, #{conn2Volt}, #{conn2Curr}, #{conn2Temp}) 	
+		}
+	</insert>
+
+	<insert id="addEvent" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddEvent(#{ev_catt}, #{ev_type}, #{ev_subtype}, #{ev_content}, #{ev_target}) 	
+		}
+	</insert>
+	
+	<insert id="addCardTagRegistTransaction" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddCardTagRegistTransaction(#{memberId}, #{machineId}, #{cardNum}) 	
+		}
+	</insert>
+
+		
+	<update id="updateMachineStatus" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL UpdateMachineStatus(#{machineId}, #{status}) 	
+		}
+    </update>
+	
+	<update id="addMachineDiagnosticsStatusLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineDiagnosticsStatusLog(#{machineId}, #{status}) 	
+		}
+    </update>	
+
+	<update id="addMachineUnlockConnectorLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineUnlockConnectorLog(#{machineId}, #{connectorId}, #{status}) 	
+		}
+    </update>
+
+    <update id="addMachineChangeAvailabilityLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineChangeAvailabilityLog(#{machineId}, #{connectorId}, #{type}, #{status}) 	
+		}
+    </update>
+
+    <update id="addMachineChangeConfigurationLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineChangeConfigurationLog(#{machineId}, #{key}, #{value}, #{status}) 	
+		}
+    </update>
+
+    <update id="addMachineResetLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineResetLog(#{machineId}, #{status}) 	
+		}
+    </update>
+    
+	<update id="addMachineClearCacheLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineClearCacheLog(#{machineId}, #{status}) 	
+		}
+    </update>
+
+	<update id="addMachineClearChargingProfileLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineClearChargingProfileLog(#{machineId}, #{status}) 	
+		}
+    </update>
+    
+    <update id="addMachineTriggerMessageLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineTriggerMessageLog(#{machineId}, #{requestMessage}, #{status}) 	
+		}
+    </update>
+
+    <update id="addMachineGetConfigurationLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineGetConfigurationLog(#{machineId}, #{status}, #{configurationKey}, #{unknownKey}) 	
+		}
+    </update>
+
+    <update id="addMachineGetLocalListVersionLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineGetLocalListVersionLog(#{machineId}, #{status}, #{listVersion}) 	
+		}
+    </update>
+
+    <update id="addMachineSendLocalListLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineSendLocalListLog(#{machineId}, #{status}, #{listVersion}, #{localAuthorizationList}, #{updateType}) 	
+		}
+    </update>
+
+    <update id="addMachineSetChargingProfileLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineSetChargingProfileLog(#{machineId}, #{status}, #{connectorId}, #{csChargingProfiles}) 	
+		}
+    </update>
+
+    <update id="addMachineReserveNowLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineReserveNowLog(#{machineId}, #{connectorId}, #{reservationId}, #{expiryDate}, #{idTag}, #{status}) 	
+		}
+    </update>
+
+    <update id="addMachineCancelReservationLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineCancelReservationLog(#{machineId}, #{reservationId}, #{status}) 	
+		}
+    </update>
+
+    <update id="addMachineRemoteStartTransactionLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineRemoteStartTransactionLog(#{machineId}, #{connectorId}, #{idTag}, #{status}) 	
+		}
+    </update>
+
+    <update id="addMachineRemoteStopTransactionLog" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineRemoteStopTransactionLog(#{machineId}, #{connectorId}, #{status}) 	
+		}
+    </update>
+    
+    <update id="addMachineGetCompositeScheduleData" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineGetCompositeScheduleData(#{compositeScheduleIdx}, #{chargingRateUnit}, #{startPeriod}, #{limit}) 	
+		}
+    </update>
+    
+	<update id="addMachineDiagnosticsFile" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL AddMachineDiagnosticsFile(#{machineId}, #{fileName}) 	
+		}
+    </update>	
+    
+    <update id="updateTransaction" statementType="CALLABLE" parameterType="HashMap">    
+        {
+            CALL UpdateTransaction(#{machineId}, #{cardTag}, #{power}, #{transactionPower}, #{timeStamp})   
+        }
+    </update>
+
+	<update id="updateCardTagRegistTransaction" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL UpdateCardTagRegistTransaction(#{memberId}, #{machineId}, #{status}, #{cardTag}) 	
+		}
+	</update>
+
+    <update id="updateConnectorStatus" statementType="CALLABLE" parameterType="HashMap">    
+        {
+            CALL UpdateConnectorStatus(#{machineId}, #{connectorId}, #{connectorStatus})    
+        }
+    </update>
+    
+    <update id="updateFirmwareStatus" statementType="CALLABLE" parameterType="HashMap"> 
+        {
+            CALL UpdateFirmwareStatus(#{machineId}, #{status}, #{fwType}, #{prog}, #{dnProg}, #{failReason})    
+        }
+    </update>
+
+    <update id="updateFirmwareVersion" statementType="CALLABLE" parameterType="HashMap"> 
+        {
+            CALL UpdateFirmwareVersion(#{machineId}, #{fwType}, #{fwVersion})    
+        }
+    </update>
+    
+    <update id="verifyInstallationStatus" statementType="CALLABLE" parameterType="HashMap">   
+        {
+            CALL VerifyInstallationStatus(#{machineId})
+        }
+    </update>
+
+    <update id="updateFirmwareUpdateStatus" statementType="CALLABLE" parameterType="HashMap">   
+        {
+            CALL UpdateFirmwareUpdateStatus(#{machineId}, #{status})
+        }
+    </update>
+
+    <update id="updateMachineHeartbeatRecvLog" statementType="CALLABLE" parameterType="HashMap">   
+        {
+            CALL UpdateMachineHeartbeatRecvLog(#{machineId})
+        }
+    </update>
+    
+    <update id="updateServerTransactionInfo" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL UpdateServerTransactionInfo(#{machineId}, #{connectorId}, #{transactionId}, #{idTag}, #{lastPower}, #{updateTime}) 	
+		}
+    </update>
+
+    <update id="dropServerTransactionInfo" statementType="CALLABLE" parameterType="HashMap">	
+		{
+			CALL DropServerTransactionInfo(#{machineId}, #{connectorId}) 	
+		}
+    </update>
+        
+    <select id="selectMachineId" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap"> 
+        {
+            CALL SelectMachineId(#{SidoCode}, #{GugunCode}, #{upmunCode}, #{stationIdx}, #{machineIdx})     
+        }
+    </select>
+    
+    <select id="selectChargeMachineId" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL SelectChargeMachineId(#{sidoCode}, #{gugunCode}, #{upmunCode}, #{stationIdx}, #{machineIdx})
+        }
+    </select>
+    
+    <select id="selectChargeStationIdx" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">  
+        {
+            CALL selectChargeStationIdx(#{sidoCode}, #{gugunCode})
+        }
+    </select>
+    
+    <select id="selectAddrGugunInfo" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap"> 
+        {
+            CALL SelectAddrGugunInfo(#{sidoCode})   
+        }
+    </select>
+    
+    <select id="selectGugunUpdateInfo" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL SelectGugunUpdateInfo(#{sidoCode})
+        }
+    </select>
+    	
+	<update id="updateChargeMachineSystemConfig" statementType="CALLABLE" parameterType="HashMap">
+        {
+            CALL UpdateChargeMachineSystemConfig(#{machineIdx}, #{machineId}, #{OverVol}, #{UnderVol}, #{OverCur}, #{OverTemp}, #{BccInt}, #{CdTo},
+            #{NfcPwr}, #{NfcInt}, #{LcdCont}, #{TmTime}, #{LcdDpTime}, #{TagMode}, #{RepInt}, #{McInt}, #{SigInt}, #{SaMvInt}, #{CaMvInt}, #{CaOnStop},
+            #{SaOnStop}, #{TxTo}, #{TxRetry}, #{TxDelay}, #{CnTo}, #{CnDelay}, #{CnRetry}, #{MrTo}, #{MrCnt}, #{PtsDelay}, #{OffcsOn}, #{TimeInt})
+        }
+    </update>
+    
+    <select id="selectChargeMachineSystemConfig" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL SelectChargeMachineSystemConfig(#{machineIdx}, #{machineId})
+        }
+    </select>
+    
+    <select id="selectChargeMachineSystemConfigProfile" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL SelectChargeMachineSystemConfigProfile(#{machineIdx}, #{machineId})
+        }
+    </select>
+    
+    <select id="selectChargeMachineSystemConfigProfileVersion" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL SelectChargeMachineSystemConfigProfileVersion(#{machineIdx}, #{machineId})
+        }
+    </select>
+
+	<select id="getLastReservationId" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL GetLastReservationId()
+        }
+    </select>
+
+    <select id="addMachineGetCompositeScheduleLog" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL AddMachineGetCompositeScheduleLog(#{machineId}, #{connectorId}, #{duration}, #{status})
+        }
+    </select>
+    
+    <select id="selectServerTransactionInfo" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL SelectServerTransactionInfo()
+        }
+    </select>
+    
+    <select id="getMemberProfileChargeTypeFromCardTag" statementType="CALLABLE" parameterType="HashMap" resultType="HashMap">   
+        {
+            CALL GetMemberProfileChargeTypeFromCardTag(#{cardTag})
+        }
+    </select>
+    
+    
+</mapper>
