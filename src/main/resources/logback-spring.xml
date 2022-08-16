@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOGS_ABSOLUTE_PATH" value="/opt/tomcat8/ocpp16.gresystem.co.kr/webapps/logs" />   
+    <property name="LOGS_ABSOLUTE_PATH" value="/Users/gyubin/project/gre-sys-evcms/src/main/java/kr/co/watchpoint/evcms/logs" />
     <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOGS_ABSOLUTE_PATH}/logback.log</file>
         <encoder>

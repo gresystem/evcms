@@ -1,11 +1,13 @@
 package kr.co.watchpoint.evcms;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
+@MapperScan(basePackages = "kr.co.watchpoint.evcms")
 public class Application extends SpringBootServletInitializer {
 
 	@Override

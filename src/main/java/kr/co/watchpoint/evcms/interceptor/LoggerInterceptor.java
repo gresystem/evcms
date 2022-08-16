@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 @Component
-public class LoggerInterceptor extends HandlerInterceptorAdapter {
+public class LoggerInterceptor implements HandlerInterceptor {
 	
 	private Logger logger = LoggerFactory.getLogger("MainController");
 	
@@ -30,13 +30,16 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
 				logger.info("Header Name -> " + headerNames.nextElement());
 			}
 		}
-		
-		return super.preHandle(request, response, handler);
+
+
+
+		return HandlerInterceptor.super.preHandle(request, response, handler);
+
 	}
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		
-		super.postHandle(request, response, handler, modelAndView);
+
+		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}
 }

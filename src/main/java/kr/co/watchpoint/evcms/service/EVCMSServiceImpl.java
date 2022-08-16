@@ -7,11 +7,14 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import kr.co.watchpoint.evcms.dao.EVCMSDAO;
 
-@Service("EVCMSService")
+
+@Service("EVCMSServices") @Primary
 public class EVCMSServiceImpl implements EVCMSService{
 	private Logger logger = LoggerFactory.getLogger("EVCMSServiceImpl");
 	
